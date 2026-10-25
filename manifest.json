@@ -1,0 +1,86 @@
+{
+   "author": "AppWork GmbH",
+   "background": {
+      "service_worker": "mv3/sw.js"
+   },
+   "action": {
+      "default_icon": "images/icon32.png",
+      "default_popup": "popup.html",
+      "default_title": "MyJDownloader"
+   },
+   "commands": {
+      "auto-grab-downloads": {
+         "description": "__MSG_toggle_auto_grab_links__",
+         "suggested_key": {
+            "default": "Ctrl+Shift+Y",
+            "mac": "Command+Shift+Y"
+         }
+      },
+      "toggle-clipboard-observer": {
+         "description": "__MSG_toggle_clipboard_observer__",
+         "suggested_key": {
+            "default": "Ctrl+Shift+X",
+            "mac": "Command+Shift+X"
+         }
+      }
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "js": [ "contentscripts/rc2Contentscript.js" ],
+      "matches": [ "<all_urls>" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": true,
+      "js": [ "contentscripts/rc2LoadingIndicator.js" ],
+      "matches": [ "<all_urls>" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": true,
+      "js": [ "contentscripts/onCopyContentscript.js" ],
+      "matches": [ "<all_urls>" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": true,
+      "js": [ "contentscripts/toolbarContentscript.js" ],
+      "matches": [ "<all_urls>" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": true,
+      "js": [ "contentscripts/selectionContentscript.js" ],
+      "matches": [ "<all_urls>" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": true,
+      "js": [ "contentscripts/webinterfaceEnhancer.js" ],
+      "matches": [ "http://my.jdownloader.org/*", "https://my.jdownloader.org/*", "http://my.jdownloader.org/*" ],
+      "run_at": "document_end"
+   } ],
+   "declarative_net_request": {
+      "rule_resources": [ {
+         "id": "jdcheck",
+         "enabled": false,
+         "path": "mv3/jdcheck-rules.json"
+      } ]
+   },
+   "default_locale": "en",
+   "description": "__MSG_extensionDescription__",
+   "homepage_url": "https://my.jdownloader.org",
+   "icons": {
+      "128": "images/icon128.png",
+      "48": "images/icon48.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC5iAn1N8mgIVF0wjyn8a3SCebyNKAN6EkWFUDAvMc6ZHnerLrcQ0/o7miO3U33jGD4bgLyEkSRcsCRYY4W/OI7/mlOjxQZkLhfHS/j1r0Qs+G0IJjSUq+MciVyes6pRqly4sqZVQgnzYnqkQJeAz0cLcAzlQpN7f6QHOJsynWYgwIDAQAB",
+   "manifest_version": 3,
+   "name": "__MSG_extensionName__",
+   "options_ui": {
+      "page": "index.html#!/settings"
+   },
+   "permissions": [ "tabs", "storage", "webRequest", "contextMenus", "scripting", "offscreen", "declarativeNetRequest" ],
+   "host_permissions": [ "<all_urls>" ],
+   "short_name": "MyJDownloader",
+   "version": "3.4.0",
+   "web_accessible_resources": [ {
+      "resources": [ "toolbar.html", "autograbber-indicator.html", "res/browser_solver_template.html", "jdcheck.js" ],
+      "matches": [ "<all_urls>" ]
+   } ]
+}
